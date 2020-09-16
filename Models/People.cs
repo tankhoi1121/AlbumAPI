@@ -9,6 +9,27 @@ namespace AlbumAPI.Models
     public class People : IAlbum
     {
         List<string> _people = new List<string>();
+        private static readonly People _instancePeople = new People();
+
+        static People()
+        {
+
+        }
+
+        private People()
+        {
+
+        }
+
+        public static People Instance
+        {
+            get
+            {
+                return _instancePeople;
+            }
+        }
+
+
         public void Add(string item)
         {
             _people.Add(item);

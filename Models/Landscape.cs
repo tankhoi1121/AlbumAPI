@@ -10,6 +10,26 @@ namespace AlbumAPI.Models
     {
         List<string> _landScape = new List<string>();
 
+        private static readonly Landscape _instanceLandscape = new Landscape();
+
+        static Landscape()
+        {
+
+        }
+
+        private Landscape()
+        {
+
+        }
+
+        public static Landscape Instance
+        {
+            get
+            {
+                return _instanceLandscape;
+            }
+        }
+
         public void Add(string item)
         {
             _landScape.Add(item);
