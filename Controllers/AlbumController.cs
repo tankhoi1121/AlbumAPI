@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AlbumAPI.Models;
 using AlbumAPI.Models.Interface;
+using AlbumAPI.Services;
 using System.IO;
 
 namespace AlbumAPI.Controllers
@@ -21,12 +22,14 @@ namespace AlbumAPI.Controllers
             People,
             Tech
         }
+
         [HttpGet]
         public List<string> Index()
         {
-            IAlbum _landScape = Landscape.Instance;
-            IAlbum _people = People.Instance;
-            IAlbum _tech = Tech.Instance;
+            IAlbum _landScape = Landscape.Instance,
+                _people = People.Instance,
+                _tech = Tech.Instance;
+
 
             var listLandscapeExample = Directory
                .GetFiles
@@ -71,19 +74,31 @@ namespace AlbumAPI.Controllers
         public List<string> GetLandscapeAlbum()
         {
             IAlbum _landScape = Landscape.Instance;
-            if (_landScape.GetAll() == null)
-            {
-                var listLandscapeExample = Directory
+            List<string> baseData = null;
+            var listLandscapeExample = Directory
                 .GetFiles
                 (@"C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\wwwroot\Landscape\");
-                foreach (var path in listLandscapeExample)
-                {
-                    _landScape.Add(prefix + Categorry.Landscape + "/" + Path.GetFileName(path));
-                }
+            if (baseData == null)
+            {
+
+                //foreach (var path in listLandscapeExample)
+                //{
+                //    _landScape.Add(prefix + Categorry.Landscape + "/" + Path.GetFileName(path));
+                //}
+                baseData = _landScape.GetAll();
                 return _landScape.GetAll();
             }
             else
             {
+                //filter newData added
+                var newData = baseData.Except(listLandscapeExample.ToList<string>()).ToList();
+                if (newData != null)
+                {
+                    foreach (var item in newData)
+                    {
+                        _landScape.Add(item);
+                    }
+                }
                 return _landScape.GetAll();
             }
         }
@@ -92,20 +107,33 @@ namespace AlbumAPI.Controllers
         public List<string> GetPeopleAlbum()
         {
             IAlbum _people = People.Instance;
-            if (_people.GetAll() == null)
-            {
-                var listPeopleExample = Directory
+            List<string> baseData = null;
+            var listPeopleExample = Directory
                 .GetFiles
                 (@"C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\wwwroot\People\");
-                foreach (var path in listPeopleExample)
-                {
-                    _people.Add(prefix + Categorry.People + "/" + Path.GetFileName(path));
+            if (baseData == null)
+            {
 
-                }
+                //foreach (var path in listPeopleExample)
+                //{
+                //    _people.Add(prefix + Categorry.People + "/" + Path.GetFileName(path));
+
+                //}
+
+                baseData = _people.GetAll();
                 return _people.GetAll();
             }
             else
             {
+                //filter newData added
+                var newData = baseData.Except(listPeopleExample.ToList<string>()).ToList();
+                if (newData != null)
+                {
+                    foreach (var item in newData)
+                    {
+                        _people.Add(item);
+                    }
+                }
                 return _people.GetAll();
             }
         }
@@ -114,23 +142,32 @@ namespace AlbumAPI.Controllers
         public List<string> GetTechAlbum()
         {
             IAlbum _tech = Tech.Instance;
+            List<string> baseData = null;
 
-            if (_tech.GetAll() == null)
+            var listTechExample = Directory
+            .GetFiles
+            (@"C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\wwwroot\Tech\");
+
+            if (baseData == null)
             {
-                var listTechExample = Directory
-                .GetFiles
-                (@"C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\wwwroot\Tech\");
-
-
-
-                foreach (var path in listTechExample)
-                {
-                    _tech.Add(prefix + Categorry.Tech + "/" + Path.GetFileName(path));
-                }
+                //foreach (var path in listTechExample)
+                //{
+                //    _tech.Add(prefix + Categorry.Tech + "/" + Path.GetFileName(path));
+                //}
+                baseData = _tech.GetAll();
                 return _tech.GetAll();
             }
             else
             {
+                //filter newData added
+                var newData = baseData.Except(listTechExample.ToList<string>()).ToList();
+                if (newData != null)
+                {
+                    foreach (var item in newData)
+                    {
+                        _tech.Add(item);
+                    }
+                }
                 return _tech.GetAll();
             }
         }
