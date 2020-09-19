@@ -16,3 +16,4 @@ C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\obj\Debug\netcoreapp2.1\AlbumAPI.R
 C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\obj\Debug\netcoreapp2.1\AlbumAPI.dll
 C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\obj\Debug\netcoreapp2.1\AlbumAPI.pdb
 C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\obj\Debug\netcoreapp2.1\AlbumAPI.genruntimeconfig.cache
+C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
