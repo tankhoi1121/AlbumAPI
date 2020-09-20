@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AlbumAPI.Models
 {
     using Interface;
-    public class People : IAlbum
+    public sealed class People : IAlbum
     {
         List<string> _people = new List<string>();
         private static readonly People _instancePeople = new People();

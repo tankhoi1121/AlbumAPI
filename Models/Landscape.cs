@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AlbumAPI.Models
 {
     using Interface;
-    public class Landscape : IAlbum
+    public sealed class Landscape : IAlbum
     {
         List<string> _landScape = new List<string>();
 

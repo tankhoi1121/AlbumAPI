@@ -54,7 +54,7 @@ namespace AlbumAPI.Controllers
               .GetFiles
               (@"C:\Users\khoin\source\repos\AlbumAPI\AlbumAPI\wwwroot\Tech\");
 
-            List<string> res = new List<string>();
+
 
 
             foreach (var path in listLandscapeExample)
@@ -74,11 +74,19 @@ namespace AlbumAPI.Controllers
                 _album[2].Add(prefix + Categorry.Tech + "/" + Path.GetFileName(path));
             }
 
+            ResModel resModel = ResModel.Instance;
 
-            res.AddRange(this.GetLandscapeAlbum());
-            res.AddRange(this.GetPeopleAlbum());
-            res.AddRange(this.GetTechAlbum());
-            return res;
+            if (resModel.ResList.Count == 0)
+            {
+                resModel.ResList.AddRange(this.GetLandscapeAlbum());
+                resModel.ResList.AddRange(this.GetPeopleAlbum());
+                resModel.ResList.AddRange(this.GetTechAlbum());
+                return resModel.ResList;
+            }
+            else
+            {
+                return resModel.ResList;
+            }
         }
 
         [HttpGet("Landscape")]
